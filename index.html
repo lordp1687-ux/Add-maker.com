@@ -1,0 +1,918 @@
+html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdPulse Bangladesh | Low-Cost Social Media Ad Management & BDT 200 Subscription</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        bkash: {
+                            500: '#E2136E',
+                            600: '#C2105C',
+                            700: '#9E0B49',
+                            light: '#FDEDF4'
+                        },
+                        brand: {
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            neon: '#10b981',
+                        },
+                        darkbg: '#0b0f19',
+                        darkcard: '#111827',
+                        darkborder: '#1f2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-header {
+            background: rgba(11, 15, 25, 0.9);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #E2136E 0%, #818cf8 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bkash-bg-gradient {
+            background: linear-gradient(135deg, #E2136E 0%, #a80c50 100%);
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #E2136E;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(226, 19, 110, 0.8);
+            border: 2px solid #ffffff;
+        }
+        .custom-slider::-moz-range-thumb {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #E2136E;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(226, 19, 110, 0.8);
+            border: 2px solid #ffffff;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-bkash-500 selection:text-white">
+
+    <!-- Header / Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-header transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bkash-bg-gradient flex items-center justify-center text-white font-black text-xl shadow-lg shadow-bkash-500/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-bolt text-lg"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight text-white">Ad<span class="text-gradient">Pulse</span> <span class="text-xs text-bkash-500 font-bold uppercase tracking-wider">BD</span></span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-6 font-medium text-sm text-gray-300">
+                <a href="#pricing" class="hover:text-bkash-500 transition-colors">Subscription Plan</a>
+                <a href="#ad-builder-section" class="hover:text-bkash-500 transition-colors">Create Ad Tool</a>
+                <a href="#platforms" class="hover:text-bkash-500 transition-colors">Platforms</a>
+                <a href="#calculator" class="hover:text-bkash-500 transition-colors">ROI Calculator</a>
+                <a href="#my-campaigns" class="hover:text-bkash-500 transition-colors">My Campaigns</a>
+            </nav>
+
+            <!-- User Subscription Status & Action Button -->
+            <div class="hidden md:flex items-center gap-4">
+                <!-- Status Badge -->
+                <div id="nav-sub-status" class="px-3 py-1.5 rounded-full text-xs font-bold border border-gray-700 bg-gray-900 text-gray-400 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-gray-500"></span>
+                    <span>Free User</span>
+                </div>
+
+                <!-- bKash Subscription Button -->
+                <button id="nav-subscribe-btn" onclick="openBkashModal()" class="px-5 py-2.5 text-sm font-bold text-white bkash-bg-gradient rounded-xl shadow-lg shadow-bkash-500/30 hover:scale-[1.03] active:scale-[0.98] transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-crown text-amber-300"></i> Subscribe ৳200/mo
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white focus:outline-none p-2">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-gray-800 px-4 pt-4 pb-6 space-y-3">
+            <div id="mobile-sub-status" class="px-3 py-2 rounded-xl text-xs font-bold border border-gray-700 bg-gray-900 text-gray-300 flex items-center justify-between">
+                <span>Status:</span>
+                <span class="status-text text-amber-400">Free User</span>
+            </div>
+            <a href="#pricing" class="block py-2 text-base font-medium text-gray-300 hover:text-bkash-500">Subscription (৳200)</a>
+            <a href="#ad-builder-section" class="block py-2 text-base font-medium text-gray-300 hover:text-bkash-500">Ad Creator Tool</a>
+            <a href="#platforms" class="block py-2 text-base font-medium text-gray-300 hover:text-bkash-500">Supported Platforms</a>
+            <a href="#calculator" class="block py-2 text-base font-medium text-gray-300 hover:text-bkash-500">ROI Calculator</a>
+            <a href="#my-campaigns" class="block py-2 text-base font-medium text-gray-300 hover:text-bkash-500">My Campaigns</a>
+            <div class="pt-2 border-t border-gray-800">
+                <button onclick="openBkashModal()" class="w-full text-center py-3 text-sm font-bold text-white bkash-bg-gradient rounded-xl shadow-lg">
+                    Subscribe with bKash (৳200/mo)
+                </button>
+            </div>
+        </div>
+    </header>
+
+// বিকাশে সাবস্ক্রাইব করার জন্য
+function sendPaymentToServer(bkashNum, trxId) {
+    fetch('process.php?action=subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ bkashNumber: bkashNum, trxId: trxId })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+    });
+}
+
+// নতুন অ্যাড সেভ করার জন্য
+function sendAdToServer(brand, platform, caption, cta) {
+    fetch('process.php?action=create_ad', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ brandName: brand, platform: platform, caption: caption, cta: cta })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);
+    });
+}
+
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <!-- Ambient Background Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-bkash-500/15 rounded-full blur-[140px] -z-10 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-panel border border-bkash-500/40 text-xs sm:text-sm font-medium text-bkash-light">
+                        <span class="w-2 h-2 rounded-full bg-bkash-500 animate-ping"></span>
+                        <span class="font-bold text-white">bKash Instant Access:</span> Monthly Subscription BDT 200/mo
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
+                        Create & Publish <br class="hidden sm:inline">
+                        Social Ads for <span class="text-gradient">Just ৳200/Month</span>
+                    </h1>
+
+                    <p class="text-lg text-gray-400 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Run targeted ads on <strong class="text-white">Facebook, Instagram, TikTok & YouTube</strong> across Dhaka, Chittagong, and all Bangladesh. Pay directly with <strong class="text-bkash-500">bKash</strong> and unlock our instant Ad Creator tool!
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                        <button onclick="openBkashModal()" class="w-full sm:w-auto px-8 py-4 text-base font-bold text-white bkash-bg-gradient rounded-xl shadow-xl shadow-bkash-500/30 hover:scale-105 transition-all text-center flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-mobile-screen-button text-xl"></i> Subscribe ৳200 via bKash
+                        </button>
+                        <a href="#ad-builder-section" class="w-full sm:w-auto px-8 py-4 text-base font-bold text-gray-200 glass-panel rounded-xl hover:bg-gray-800 hover:text-white transition-all text-center border border-gray-700">
+                            Try Ad Creator Tool <i class="fa-solid fa-arrow-down ml-2 text-xs"></i>
+                        </a>
+                    </div>
+
+                    <!-- Highlights -->
+                    <div class="pt-6 border-t border-gray-800/80 grid grid-cols-3 gap-4 text-center lg:text-left">
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-black text-white">৳200</p>
+                            <p class="text-xs text-gray-400">Fixed Monthly Rate</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-black text-bkash-500">bKash</p>
+                            <p class="text-xs text-gray-400">Instant Verification</p>
+                        </div>
+                        <div>
+                            <p class="text-2xl sm:text-3xl font-black text-emerald-400">All BD</p>
+                            <p class="text-xs text-gray-400">Targeted Audience</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Cards -->
+                <div class="lg:col-span-5 relative">
+                    <div class="glass-panel p-6 rounded-3xl border border-gray-700 shadow-2xl space-y-4">
+                        <div class="flex items-center justify-between pb-3 border-b border-gray-800">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-xl bkash-bg-gradient text-white flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-wallet"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm text-white">bKash Payment System</h4>
+                                    <p class="text-xs text-gray-400">Fast 1-Minute Activation</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">
+                                Automatic TrxID
+                            </span>
+                        </div>
+
+                        <!-- bKash Simulation Graphic -->
+                        <div class="bg-gray-900/90 rounded-2xl p-4 border border-gray-800 space-y-3">
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Merchant Account:</span>
+                                <span class="font-mono font-bold text-bkash-500">01700-000000</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Subscription Cost:</span>
+                                <span class="font-bold text-white">BDT 200.00 / month</span>
+                            </div>
+                            <div class="flex justify-between text-xs text-gray-400">
+                                <span>Method:</span>
+                                <span class="text-gray-200">bKash App / Dial *247#</span>
+                            </div>
+                            <button onclick="openBkashModal()" class="w-full py-2.5 bg-bkash-500/20 text-bkash-500 hover:bg-bkash-500 hover:text-white font-bold text-xs rounded-xl border border-bkash-500/40 transition-all text-center">
+                                Click Here To Pay ৳200 Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Lock/Unlock Ad Builder Tool -->
+    <section id="ad-builder-section" class="py-20 relative bg-gray-950 border-y border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+                <span class="text-xs font-bold uppercase tracking-widest text-bkash-500">Exclusive Feature</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Social Ad Creator & Campaign Launcher</h2>
+                <p class="text-gray-400 text-sm">Design custom ads for Facebook, Instagram, TikTok & YouTube. Unlocked with your BDT 200/mo subscription!</p>
+            </div>
+
+            <!-- Subscribed vs Locked Notice Banner -->
+            <div id="ad-tool-banner" class="mb-8 p-4 rounded-2xl border flex flex-col sm:flex-row items-center justify-between gap-4 bg-amber-500/10 border-amber-500/30 text-amber-300">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-lock text-2xl text-amber-400"></i>
+                    <div>
+                        <h4 class="font-bold text-sm text-white">Ad Builder is Locked</h4>
+                        <p class="text-xs text-gray-300">You need an active ৳200 subscription to submit and publish social media ads.</p>
+                    </div>
+                </div>
+                <button onclick="openBkashModal()" class="px-5 py-2 text-xs font-bold text-white bkash-bg-gradient rounded-xl whitespace-nowrap shadow-md">
+                    Unlock Now for ৳200
+                </button>
+            </div>
+
+            <!-- Main Ad Creator Container -->
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Ad Form (Left) -->
+                <div class="lg:col-span-7 glass-panel p-6 sm:p-8 rounded-3xl border border-gray-800 space-y-6 relative">
+                    <!-- Blur Overlay if not subscribed -->
+                    <div id="ad-form-overlay" class="absolute inset-0 bg-gray-950/80 backdrop-blur-sm z-20 rounded-3xl flex flex-col items-center justify-center p-6 text-center">
+                        <div class="w-16 h-16 rounded-2xl bkash-bg-gradient flex items-center justify-center text-white text-2xl mb-4 shadow-xl shadow-bkash-500/30">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Subscribe To Unlock Ad Creator</h3>
+                        <p class="text-xs text-gray-400 max-w-sm mb-6">Pay BDT 200 via bKash to build, preview, and send unlimited ad campaigns directly to our media team.</p>
+                        <button onclick="openBkashModal()" class="px-8 py-3.5 text-sm font-bold text-white bkash-bg-gradient rounded-xl shadow-xl shadow-bkash-500/40 hover:scale-105 transition-all">
+                            Pay BDT 200 via bKash
+                        </button>
+                    </div>
+
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-bkash-500"></i> Configure Campaign Details
+                    </h3>
+
+                    <form id="ad-creator-form" class="space-y-4">
+                        <!-- Platform Selection -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-2">Target Social Platform</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                <label class="p-3 rounded-xl bg-gray-900 border border-bkash-500 flex items-center gap-2 cursor-pointer text-xs font-semibold text-white">
+                                    <input type="radio" name="ad_platform" value="Facebook" checked class="accent-bkash-500" onchange="updateAdPreview()">
+                                    <i class="fa-brands fa-facebook text-blue-500 text-sm"></i> Facebook
+                                </label>
+                                <label class="p-3 rounded-xl bg-gray-900 border border-gray-800 flex items-center gap-2 cursor-pointer text-xs font-semibold text-gray-300 hover:border-gray-700">
+                                    <input type="radio" name="ad_platform" value="Instagram" class="accent-bkash-500" onchange="updateAdPreview()">
+                                    <i class="fa-brands fa-instagram text-pink-500 text-sm"></i> Instagram
+                                </label>
+                                <label class="p-3 rounded-xl bg-gray-900 border border-gray-800 flex items-center gap-2 cursor-pointer text-xs font-semibold text-gray-300 hover:border-gray-700">
+                                    <input type="radio" name="ad_platform" value="TikTok" class="accent-bkash-500" onchange="updateAdPreview()">
+                                    <i class="fa-brands fa-tiktok text-cyan-400 text-sm"></i> TikTok
+                                </label>
+                                <label class="p-3 rounded-xl bg-gray-900 border border-gray-800 flex items-center gap-2 cursor-pointer text-xs font-semibold text-gray-300 hover:border-gray-700">
+                                    <input type="radio" name="ad_platform" value="YouTube" class="accent-bkash-500" onchange="updateAdPreview()">
+                                    <i class="fa-brands fa-youtube text-red-500 text-sm"></i> YouTube
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Target Location in BD -->
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 mb-1">Target Location (BD)</label>
+                                <select id="ad-location" class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-xs focus:outline-none focus:border-bkash-500">
+                                    <option>All Bangladesh</option>
+                                    <option>Dhaka Division</option>
+                                    <option>Chittagong Division</option>
+                                    <option>Sylhet & Rajshahi</option>
+                                    <option>Khulna & Barisal</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 mb-1">Ad Budget (BDT)</label>
+                                <input type="number" id="ad-budget-input" value="500" min="200" step="100" class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-xs focus:outline-none focus:border-bkash-500" placeholder="e.g. 500">
+                            </div>
+                        </div>
+
+                        <!-- Ad Headline -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-1">Ad Catchy Headline *</label>
+                            <input type="text" id="ad-headline-input" value="50% Off Mega Sale in Dhaka!" required class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-xs focus:outline-none focus:border-bkash-500" placeholder="e.g. Best Fashion Collection in BD" oninput="updateAdPreview()">
+                        </div>
+
+                        <!-- Ad Copy Text -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-300 mb-1">Ad Primary Text / Description *</label>
+                            <textarea id="ad-text-input" rows="3" required class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-xs focus:outline-none focus:border-bkash-500" placeholder="Write persuasive copy here..." oninput="updateAdPreview()">Get premium quality products delivered to your doorstep anywhere in Bangladesh. Cash on delivery available!</textarea>
+                        </div>
+
+                        <!-- Image URL / Upload Preview -->
+                        <div class="grid sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 mb-1">Ad Image URL</label>
+                                <input type="text" id="ad-image-input" value="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-xs focus:outline-none focus:border-bkash-500" placeholder="https://..." oninput="updateAdPreview()">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-gray-300 mb-1">Call to Action (CTA)</label>
+                                <select id="ad-cta-input" class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-xs focus:outline-none focus:border-bkash-500" onchange="updateAdPreview()">
+                                    <option>Shop Now</option>
+                                    <option>Send WhatsApp Message</option>
+                                    <option>Order Now (COD)</option>
+                                    <option>Call Now</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 text-sm font-bold text-white bkash-bg-gradient rounded-xl shadow-lg shadow-bkash-500/30 hover:scale-[1.01] transition-all">
+                            Submit Ad For Publishing <i class="fa-solid fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Live Realistic Social Ad Mockup Preview (Right) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Live Ad Preview</h3>
+                        <span id="preview-platform-tag" class="text-xs px-2.5 py-0.5 rounded-full bg-blue-600/20 text-blue-400 font-bold border border-blue-500/30">Facebook Ad</span>
+                    </div>
+
+                    <!-- Mockup Phone / Card Frame -->
+                    <div class="bg-gray-900 rounded-3xl p-4 border border-gray-800 shadow-2xl max-w-sm mx-auto">
+                        
+                        <!-- Profile Header -->
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-9 h-9 rounded-full bkash-bg-gradient flex items-center justify-center text-white font-bold text-xs">
+                                    BD
+                                </div>
+                                <div>
+                                    <h5 class="text-xs font-bold text-white">Your Business Name</h5>
+                                    <p class="text-[10px] text-gray-400 flex items-center gap-1">
+                                        Sponsored • <i class="fa-solid fa-earth-americas"></i>
+                                    </p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-ellipsis-vertical text-gray-500 text-xs"></i>
+                        </div>
+
+                        <!-- Primary Copy -->
+                        <p id="preview-body" class="text-xs text-gray-200 mb-3 leading-relaxed">
+                            Get premium quality products delivered to your doorstep anywhere in Bangladesh. Cash on delivery available!
+                        </p>
+
+                        <!-- Banner Image -->
+                        <div class="relative rounded-xl overflow-hidden bg-gray-950 aspect-video mb-3 border border-gray-800">
+                            <img id="preview-img" src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80" alt="Ad Banner" class="w-full h-full object-cover">
+                        </div>
+
+                        <!-- Ad CTA Bar -->
+                        <div class="bg-gray-950 p-3 rounded-xl border border-gray-800 flex items-center justify-between">
+                            <div class="max-w-[180px]">
+                                <span class="text-[9px] uppercase tracking-wider text-gray-500 block">ADPLUS MEDIA BD</span>
+                                <h5 id="preview-headline" class="text-xs font-bold text-white truncate">50% Off Mega Sale in Dhaka!</h5>
+                            </div>
+                            <button id="preview-cta" class="px-3 py-1.5 bg-gray-800 hover:bg-gray-700 text-white font-bold text-xs rounded-lg border border-gray-700">
+                                Shop Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- My Submitted Campaigns Dashboard -->
+    <section id="my-campaigns" class="py-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-white">My Active Ad Campaigns</h3>
+                    <p class="text-xs text-gray-400">Track status and live performance metrics of your submitted ads.</p>
+                </div>
+                <button onclick="updateAdPreview()" class="px-4 py-2 text-xs font-bold text-gray-300 glass-panel rounded-xl border border-gray-800 hover:text-white">
+                    <i class="fa-solid fa-rotate mr-1"></i> Refresh Dashboard
+                </button>
+            </div>
+
+            <!-- Table Container -->
+            <div class="glass-panel rounded-2xl border border-gray-800 overflow-x-auto">
+                <table class="w-full text-left text-xs text-gray-300">
+                    <thead class="bg-gray-900/80 text-gray-400 uppercase text-[10px] tracking-wider border-b border-gray-800">
+                        <tr>
+                            <th class="p-4">Platform</th>
+                            <th class="p-4">Headline</th>
+                            <th class="p-4">Target Area</th>
+                            <th class="p-4">Budget</th>
+                            <th class="p-4">Status</th>
+                            <th class="p-4">Est. Impressions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="campaign-list-body" class="divide-y divide-gray-800/60">
+                        <!-- Default Mock Row -->
+                        <tr>
+                            <td class="p-4 font-semibold text-blue-400"><i class="fa-brands fa-facebook mr-1"></i> Facebook</td>
+                            <td class="p-4 font-bold text-white">Dhaka E-Commerce Promo</td>
+                            <td class="p-4">Dhaka Division</td>
+                            <td class="p-4 font-mono">৳500</td>
+                            <td class="p-4"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Running</span></td>
+                            <td class="p-4 font-mono">12,450</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / BDT 200 Subscription Section -->
+    <section id="pricing" class="py-20 relative bg-gray-950/60 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+                <span class="text-xs font-bold uppercase tracking-widest text-bkash-500">Transparent Pricing</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Select Your Bangladesh Package</h2>
+                <p class="text-gray-400 text-sm">Pay easily using bKash Personal or Merchant Send Money.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+                
+                <!-- BDT 200 Plan -->
+                <div class="glass-panel rounded-3xl p-8 border-2 border-bkash-500 relative flex flex-col justify-between shadow-2xl shadow-bkash-500/20 bg-gradient-to-b from-gray-900 to-gray-950">
+                    <span class="absolute -top-3.5 left-1/2 -translate-x-1/2 bkash-bg-gradient text-white text-[10px] font-black uppercase tracking-wider px-4 py-1 rounded-full shadow-lg">
+                        Most Popular
+                    </span>
+
+                    <div>
+                        <div class="mb-6">
+                            <span class="px-3 py-1 text-xs font-bold text-bkash-500 bg-bkash-500/10 rounded-full border border-bkash-500/20">bKash Special</span>
+                            <h3 class="text-2xl font-bold text-white mt-3">Basic Ad Creator Pass</h3>
+                            <p class="text-xs text-gray-400 mt-1">For small business owners & page admins in BD.</p>
+                        </div>
+
+                        <div class="mb-6">
+                            <span class="text-5xl font-black text-white">৳200</span>
+                            <span class="text-gray-400 text-sm">/month</span>
+                            <p class="text-[11px] text-bkash-500 font-bold mt-1">bKash Send Money BDT 200</p>
+                        </div>
+
+                        <ul class="space-y-3 text-xs text-gray-200 mb-8 border-t border-gray-800 pt-6">
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon font-bold"></i> Full Access to Ad Creator Tool</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon font-bold"></i> Facebook & Instagram Ad Submissions</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon font-bold"></i> TikTok & YouTube Video Ad Options</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon font-bold"></i> Audience Targeting in Dhaka, CTG & All BD</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon font-bold"></i> Campaign Management Dashboard</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon font-bold"></i> 24/7 WhatsApp Support in Bengali</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="openBkashModal()" class="w-full py-4 text-center text-sm font-bold text-white bkash-bg-gradient rounded-xl shadow-lg shadow-bkash-500/30 hover:scale-[1.02] transition-all">
+                        Pay ৳200 via bKash Now
+                    </button>
+                </div>
+
+                <!-- Pro Growth Plan -->
+                <div class="glass-panel rounded-3xl p-8 border border-gray-800 flex flex-col justify-between hover:border-gray-700 transition-all">
+                    <div>
+                        <div class="mb-6">
+                            <span class="px-3 py-1 text-xs font-bold text-indigo-400 bg-indigo-500/10 rounded-full border border-indigo-500/20">Managed Growth</span>
+                            <h3 class="text-2xl font-bold text-white mt-3">Managed Pro Campaign</h3>
+                            <p class="text-xs text-gray-400 mt-1">Full agency service with graphic design.</p>
+                        </div>
+
+                        <div class="mb-6">
+                            <span class="text-4xl font-black text-white">৳1,500</span>
+                            <span class="text-gray-400 text-sm">/month</span>
+                            <p class="text-[11px] text-gray-500 mt-1">+ Your custom ad budget</p>
+                        </div>
+
+                        <ul class="space-y-3 text-xs text-gray-300 mb-8 border-t border-gray-800 pt-6">
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon"></i> Includes Everything in ৳200 Pass</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon"></i> Custom Banner Design by BD Designers</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon"></i> Bengali Copywriting & Hook Creation</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon"></i> Pixel Setup & Lead Generation</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="openBkashModal()" class="w-full py-3.5 text-center text-sm font-bold text-white glass-panel border border-gray-700 hover:bg-gray-800 rounded-xl transition-all">
+                        Choose Pro Plan
+                    </button>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="glass-panel rounded-3xl p-8 border border-gray-800 flex flex-col justify-between hover:border-gray-700 transition-all">
+                    <div>
+                        <div class="mb-6">
+                            <span class="px-3 py-1 text-xs font-bold text-emerald-400 bg-emerald-500/10 rounded-full border border-emerald-500/20">E-Commerce Scale</span>
+                            <h3 class="text-2xl font-bold text-white mt-3">Full BD Domination</h3>
+                            <p class="text-xs text-gray-400 mt-1">Multi-channel scaling for top brands.</p>
+                        </div>
+
+                        <div class="mb-6">
+                            <span class="text-4xl font-black text-white">৳3,500</span>
+                            <span class="text-gray-400 text-sm">/month</span>
+                        </div>
+
+                        <ul class="space-y-3 text-xs text-gray-300 mb-8 border-t border-gray-800 pt-6">
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon"></i> Multi-platform scaling</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon"></i> Daily Optimization & A/B testing</li>
+                            <li class="flex items-center gap-2.5"><i class="fa-solid fa-check text-brand-neon"></i> Dedicated BD Account Manager</li>
+                        </ul>
+                    </div>
+
+                    <button onclick="openBkashModal()" class="w-full py-3.5 text-center text-sm font-bold text-white glass-panel border border-gray-700 hover:bg-gray-800 rounded-xl transition-all">
+                        Contact Sales
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive ROI Calculator (BDT Context) -->
+    <section id="calculator" class="py-20 relative">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center space-y-3 mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-neon">BD Ad Budget Estimator</span>
+                <h2 class="text-3xl font-extrabold text-white">Calculate Estimated Ad Reach in BD</h2>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-gray-700/80 shadow-2xl">
+                <div class="grid lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-6">
+                        <div>
+                            <div class="flex justify-between items-center mb-3">
+                                <label class="text-sm font-semibold text-gray-200">Daily Ad Budget (BDT):</label>
+                                <span id="budget-value" class="text-2xl font-black text-bkash-500">৳500</span>
+                            </div>
+                            <input type="range" id="ad-budget" min="200" max="10000" step="100" value="500" class="w-full h-2.5 bg-gray-800 rounded-lg appearance-none cursor-pointer custom-slider">
+                            <div class="flex justify-between text-xs text-gray-500 mt-2">
+                                <span>৳200</span>
+                                <span>৳5,000</span>
+                                <span>৳10,000+</span>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-gray-400 leading-relaxed">
+                            Based on standard Facebook & Instagram CPM rates in Bangladesh (~৳60 - ৳90 per 1,000 impressions).
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-gradient-to-br from-gray-900 to-gray-950 p-6 rounded-2xl border border-bkash-500/30 text-center space-y-4">
+                        <span class="text-xs font-bold uppercase text-gray-400">Est. Daily Performance</span>
+                        
+                        <div>
+                            <span class="text-xs text-gray-400 block">Est. Daily Reach</span>
+                            <span id="est-reach" class="text-3xl font-black text-white">6,500 - 9,000</span>
+                            <span class="text-[11px] text-gray-500 block">people in BD</span>
+                        </div>
+
+                        <div class="pt-3 border-t border-gray-800 flex justify-around">
+                            <div>
+                                <span class="text-xs text-gray-400 block">Est. Clicks</span>
+                                <span id="est-clicks" class="text-xl font-bold text-emerald-400">250 - 400</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Platforms Grid -->
+    <section id="platforms" class="py-16 bg-gray-950/60 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h3 class="text-2xl font-bold text-white">Supported Platforms in Bangladesh</h3>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800">
+                    <i class="fa-brands fa-facebook text-blue-500 text-3xl mb-2"></i>
+                    <h4 class="font-bold text-sm text-white">Facebook Ads</h4>
+                    <p class="text-[11px] text-gray-400">Most popular in BD</p>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800">
+                    <i class="fa-brands fa-instagram text-pink-500 text-3xl mb-2"></i>
+                    <h4 class="font-bold text-sm text-white">Instagram Reels</h4>
+                    <p class="text-[11px] text-gray-400">High engagement</p>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800">
+                    <i class="fa-brands fa-tiktok text-cyan-400 text-3xl mb-2"></i>
+                    <h4 class="font-bold text-sm text-white">TikTok Video</h4>
+                    <p class="text-[11px] text-gray-400">Viral BD audience</p>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border border-gray-800">
+                    <i class="fa-brands fa-youtube text-red-500 text-3xl mb-2"></i>
+                    <h4 class="font-bold text-sm text-white">YouTube Ads</h4>
+                    <p class="text-[11px] text-gray-400">Video streaming</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- bKash Interactive Payment Gateway Modal -->
+    <div id="bkash-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="glass-panel max-w-md w-full rounded-3xl border border-bkash-500/50 overflow-hidden shadow-2xl relative animate-pulse-glow">
+            
+            <!-- bKash Modal Header -->
+            <div class="bkash-bg-gradient p-5 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 bg-white text-bkash-500 rounded-xl flex items-center justify-center font-black text-lg">
+                        b
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-sm">bKash Payment Gateway</h4>
+                        <p class="text-[11px] text-bkash-light">Subscription: BDT 200 / Month</p>
+                    </div>
+                </div>
+                <button onclick="closeBkashModal()" class="text-white hover:text-gray-200 text-xl font-bold">
+                    &times;
+                </button>
+            </div>
+
+            <!-- Modal Content (Step 1: Instructions & Input) -->
+            <div id="bkash-step-1" class="p-6 space-y-4">
+                <div class="bg-gray-900 p-4 rounded-xl border border-gray-800 text-xs space-y-2">
+                    <p class="font-bold text-white flex items-center justify-between">
+                        <span>bKash Personal Number:</span>
+                        <span id="bkash-num" class="text-bkash-500 font-mono text-sm">01700-000000</span>
+                    </p>
+                    <p class="text-gray-400">1. Open bKash App or dial *247#</p>
+                    <p class="text-gray-400">2. Select <strong class="text-white">Send Money</strong> to the number above.</p>
+                    <p class="text-gray-400">3. Amount: <strong class="text-bkash-500 font-bold">BDT 200</strong></p>
+                </div>
+
+                <form id="bkash-payment-form" class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">Your bKash Mobile Number *</label>
+                        <input type="text" id="user-bkash-num" placeholder="017XXXXXXXX" required class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-xs focus:outline-none focus:border-bkash-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 mb-1">bKash Transaction ID (TrxID) *</label>
+                        <input type="text" id="user-trxid" placeholder="e.g. BXA902K3LM" required class="w-full px-4 py-2.5 rounded-xl bg-gray-900 border border-gray-700 text-white text-xs uppercase font-mono focus:outline-none focus:border-bkash-500">
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 text-xs font-bold text-white bkash-bg-gradient rounded-xl shadow-lg shadow-bkash-500/30 hover:scale-[1.01] transition-all">
+                        Verify & Activate Subscription (৳200)
+                    </button>
+                </form>
+            </div>
+
+            <!-- Modal Content (Step 2: Processing Verification Animation) -->
+            <div id="bkash-step-2" class="p-8 text-center space-y-4 hidden">
+                <div class="w-16 h-16 border-4 border-bkash-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+                <h4 class="font-bold text-white text-base">Verifying bKash Transaction...</h4>
+                <p class="text-xs text-gray-400">Checking TrxID with bKash server. Please wait <span id="countdown-sec" class="text-bkash-500 font-bold">3</span> seconds.</p>
+            </div>
+
+            <!-- Modal Content (Step 3: Success Confirmation) -->
+            <div id="bkash-step-3" class="p-8 text-center space-y-4 hidden">
+                <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mx-auto border border-emerald-500/30">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h4 class="font-bold text-white text-xl">Subscription Active!</h4>
+                <p class="text-xs text-gray-300">Your BDT 200/mo subscription is verified. Ad Creator Tool is now completely unlocked!</p>
+                <button onclick="closeBkashModal(); scrollToAdBuilder();" class="w-full py-3 text-xs font-bold text-white bg-emerald-600 rounded-xl hover:bg-emerald-500">
+                    Start Creating Ads Now
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 border-t border-gray-900 py-12 text-gray-400 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <span class="text-lg font-bold text-white">AdPulse Bangladesh</span>
+                <p class="text-gray-500 mt-1">Affordable Social Media Advertising & bKash Subscriptions.</p>
+            </div>
+            <p>&copy; 2026 AdPulse Digital BD. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // State Management with LocalStorage Persistence
+        let isSubscribed = localStorage.getItem('adpulse_subscribed') === 'true';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSubscriptionUI();
+            updateCalculator();
+            updateAdPreview();
+
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+            // ROI Calculator Slider listener
+            document.getElementById('ad-budget').addEventListener('input', updateCalculator);
+
+            // bKash Payment Form Submission
+            document.getElementById('bkash-payment-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const trxId = document.getElementById('user-trxid').value.trim();
+                if(trxId.length < 4) {
+                    alert('Please enter a valid bKash Transaction ID (TrxID).');
+                    return;
+                }
+
+                // Show processing step
+                document.getElementById('bkash-step-1').classList.add('hidden');
+                document.getElementById('bkash-step-2').classList.remove('hidden');
+
+                let count = 3;
+                const timer = setInterval(() => {
+                    count--;
+                    document.getElementById('countdown-sec').textContent = count;
+                    if(count <= 0) {
+                        clearInterval(timer);
+                        // Activate subscription
+                        isSubscribed = true;
+                        localStorage.setItem('adpulse_subscribed', 'true');
+                        updateSubscriptionUI();
+
+                        document.getElementById('bkash-step-2').classList.add('hidden');
+                        document.getElementById('bkash-step-3').classList.remove('hidden');
+                    }
+                }, 1000);
+            });
+
+            // Ad Creator Form Submission
+            document.getElementById('ad-creator-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                if(!isSubscribed) {
+                    openBkashModal();
+                    return;
+                }
+
+                const platform = document.querySelector('input[name="ad_platform"]:checked').value;
+                const headline = document.getElementById('ad-headline-input').value;
+                const location = document.getElementById('ad-location').value;
+                const budget = document.getElementById('ad-budget-input').value;
+
+                // Add to campaigns table
+                const tbody = document.getElementById('campaign-list-body');
+                const tr = document.createElement('tr');
+                tr.className = "bg-gray-900/40";
+                tr.innerHTML = `
+                    <td class="p-4 font-semibold text-bkash-500"><i class="fa-solid fa-bullhorn mr-1"></i> ${platform}</td>
+                    <td class="p-4 font-bold text-white">${headline}</td>
+                    <td class="p-4">${location}</td>
+                    <td class="p-4 font-mono">৳${budget}</td>
+                    <td class="p-4"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">Pending Review</span></td>
+                    <td class="p-4 font-mono">0 (Starting)</td>
+                `;
+                tbody.prepend(tr);
+
+                alert('Campaign submitted successfully! Our Bangladesh media team will review and launch your ad shortly.');
+                document.getElementById('my-campaigns').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // UI Subscription State Update
+        function updateSubscriptionUI() {
+            const statusBadge = document.getElementById('nav-sub-status');
+            const subBtn = document.getElementById('nav-subscribe-btn');
+            const adOverlay = document.getElementById('ad-form-overlay');
+            const adBanner = document.getElementById('ad-tool-banner');
+
+            if(isSubscribed) {
+                statusBadge.className = "px-3 py-1.5 rounded-full text-xs font-bold border border-emerald-500/40 bg-emerald-500/10 text-emerald-400 flex items-center gap-2";
+                statusBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span> <span>Subscribed (৳200/mo Active)</span>`;
+                
+                subBtn.classList.add('hidden');
+                adOverlay.classList.add('hidden');
+
+                adBanner.className = "mb-8 p-4 rounded-2xl border flex flex-col sm:flex-row items-center justify-between gap-4 bg-emerald-500/10 border-emerald-500/30 text-emerald-300";
+                adBanner.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-circle-check text-2xl text-emerald-400"></i>
+                        <div>
+                            <h4 class="font-bold text-sm text-white">Ad Creator Tool Unlocked</h4>
+                            <p class="text-xs text-gray-300">Your bKash BDT 200 monthly plan is currently active.</p>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/30">Active</span>
+                `;
+            } else {
+                statusBadge.className = "px-3 py-1.5 rounded-full text-xs font-bold border border-gray-700 bg-gray-900 text-gray-400 flex items-center gap-2";
+                statusBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-gray-500"></span> <span>Free User</span>`;
+                subBtn.classList.remove('hidden');
+                adOverlay.classList.remove('hidden');
+            }
+        }
+
+        // Live Preview Renderer
+        function updateAdPreview() {
+            const platform = document.querySelector('input[name="ad_platform"]:checked').value;
+            const headline = document.getElementById('ad-headline-input').value || 'Your Headline Here';
+            const bodyText = document.getElementById('ad-text-input').value || 'Your ad primary text...';
+            const imageUrl = document.getElementById('ad-image-input').value || 'https://placehold.co/600x400';
+            const ctaText = document.getElementById('ad-cta-input').value;
+
+            document.getElementById('preview-headline').textContent = headline;
+            document.getElementById('preview-body').textContent = bodyText;
+            document.getElementById('preview-img').src = imageUrl;
+            document.getElementById('preview-cta').textContent = ctaText;
+
+            const tag = document.getElementById('preview-platform-tag');
+            tag.textContent = `${platform} Ad`;
+        }
+
+        // Calculator Logic
+        function updateCalculator() {
+            const budget = document.getElementById('ad-budget').value;
+            document.getElementById('budget-value').textContent = `৳${parseInt(budget).toLocaleString()}`;
+
+            const reachMin = Math.round((budget / 75) * 1000 * 0.7);
+            const reachMax = Math.round((budget / 75) * 1000 * 1.1);
+            const clicksMin = Math.round(reachMin * 0.035);
+            const clicksMax = Math.round(reachMax * 0.045);
+
+            document.getElementById('est-reach').textContent = `${reachMin.toLocaleString()} - ${reachMax.toLocaleString()}`;
+            document.getElementById('est-clicks').textContent = `${clicksMin} - ${clicksMax}`;
+        }
+
+        // Modal Helpers
+        function openBkashModal() {
+            document.getElementById('bkash-step-1').classList.remove('hidden');
+            document.getElementById('bkash-step-2').classList.add('hidden');
+            document.getElementById('bkash-step-3').classList.add('hidden');
+            document.getElementById('bkash-modal').classList.remove('hidden');
+        }
+
+        function closeBkashModal() {
+            document.getElementById('bkash-modal').classList.add('hidden');
+        }
+
+        function scrollToAdBuilder() {
+            document.getElementById('ad-builder-section').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
